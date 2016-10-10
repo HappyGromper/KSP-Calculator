@@ -289,7 +289,7 @@ public class ConceptVuforiaNavigation extends LinearOpMode {
         /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start tracking");
         telemetry.update();
-        waitForStart();
+//        waitForStart();
 
         /** Start tracking the data sets we care about. */
         stonesAndChips.activate();

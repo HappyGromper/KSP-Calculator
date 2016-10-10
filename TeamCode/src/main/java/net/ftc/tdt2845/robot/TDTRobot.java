@@ -2,16 +2,16 @@ package net.ftc.tdt2845.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystemArko;
+import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
 /**
  * Created by chris on 10/10/16.
  */
 
 public class TDTRobot {
-    public MecanumDriveSystemArko drivetrain;
+    public MecanumDriveSystem drivetrain;
 
     public TDTRobot(OpMode opMode){
-        drivetrain = new MecanumDriveSystemArko(opMode.hardwareMap, opMode.telemetry);
+        drivetrain = new MecanumDriveSystem(opMode.hardwareMap);
     }
 }

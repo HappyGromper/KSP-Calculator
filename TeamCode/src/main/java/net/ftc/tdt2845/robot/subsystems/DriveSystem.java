@@ -11,7 +11,11 @@ public abstract class DriveSystem {
     protected DcMotor frontRight  = null;
     protected DcMotor rearLeft    = null;
     protected DcMotor rearRight   = null;
+    static final private double TRANSLATIONAL_POWER_FACTOR = 0.5;
+    static final private double ROTATIONAL_POWER_FACTOR = 0.5;
 
+    // constant variable to check for THRESHOLD for joystick x, y values
+    static final private double THRESHOLD = 0.2;
     HardwareMap hardwareMap = null; // will be set in OpModeManager.runActiveOpMode
 
     public final static int ENCODER_CPR = 1120;
