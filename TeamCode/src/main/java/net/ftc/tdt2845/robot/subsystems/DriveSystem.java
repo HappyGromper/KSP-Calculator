@@ -7,16 +7,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * Adding a comment
  */
 public abstract class DriveSystem {
-    DcMotor frontLeft   = null;
-    DcMotor frontRight  = null;
-    DcMotor rearLeft    = null;
-    DcMotor rearRight   = null;
+    protected DcMotor frontLeft   = null;
+    protected DcMotor frontRight  = null;
+    protected DcMotor rearLeft    = null;
+    protected DcMotor rearRight   = null;
 
     HardwareMap hardwareMap = null; // will be set in OpModeManager.runActiveOpMode
 
-    final static int ENCODER_CPR = 1120;
-    final static double GEAR_RATIO = 1;
-    final static double diameter = 4.0;
+    public final static int ENCODER_CPR = 1120;
+    public final static double GEAR_RATIO = 1;
+    public final static double WHEEL_DIAMETER = 4.0;
 
     public DriveSystem(HardwareMap hardwareMap) {
 
