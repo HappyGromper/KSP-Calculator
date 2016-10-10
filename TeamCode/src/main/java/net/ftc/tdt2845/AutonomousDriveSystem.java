@@ -9,7 +9,42 @@ public class AutonomousDriveSystem extends DriveSystem {
     public AutonomousDriveSystem(HardwareMap hardwareMap) {
         super(hardwareMap);
     }
-    public double adjustDrivePowers(double dist, double pwr){
+
+    public double strafe(double pwr, double dist, double dirct){
+
+        //if dirct = 1 right
+        //if dirct = 2 left
+
+        double circumference = Math.PI * diameter;
+        double rotations = dist / circumference;
+        double counts = rotations * ENCODER_CPR * GEAR_RATIO;
+
+
+        if (dirct == 1) {
+            frontLeft.setPower(pwr);
+            frontRight.setPower(pwr);
+            rearLeft.setPower(pwr * -1);
+            rearRight.setPower(pwr * -1);
+        }
+        if (dirct == 2) {
+            frontLeft.setPower(pwr * -1);
+            frontRight.setPower(pwr * -1);
+            rearLeft.setPower(pwr);
+            rearRight.setPower(pwr);
+        }
+
+
+        frontLeft.setTargetPosition(frontLeft.getCurrentPosition() + (int) counts);
+        frontRight.setTargetPosition(frontRight.getCurrentPosition() + (int) counts);
+        rearLeft.setTargetPosition(rearLeft.getCurrentPosition() + (int) counts);
+        rearRight.setTargetPosition(rearRight.getCurrentPosition() + (int) counts);
+
+
+
+        return counts;
+    }
+
+    public double goForward(double dist, double pwr){
         /*
         frontLeft.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         frontRight.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -41,6 +76,8 @@ public class AutonomousDriveSystem extends DriveSystem {
         frontRight.setPower(pwr);
         rearLeft.setPower(pwr);
         rearRight.setPower(pwr);
+
+
 
         /*frontLeft.setChannelMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);
         frontRight.setChannelMode(DcMotorController.RunMode.RUN_WITHOUT_ENCODERS);

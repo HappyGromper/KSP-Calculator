@@ -72,7 +72,7 @@ public class MecanumTeleOp extends LinearOpMode {
 
 //        rearLeft.setDirection(DcMotor.Direction.REVERSE);
 //        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
+        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap, telemetry);
 
 //        dim = hardwareMap.deviceInterfaceModule.get("dim");
 //        dim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
