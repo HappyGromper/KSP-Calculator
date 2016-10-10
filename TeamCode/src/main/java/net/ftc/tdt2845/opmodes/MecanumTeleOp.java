@@ -1,4 +1,4 @@
-package net.ftc.tdt2845;
+package net.ftc.tdt2845.opmodes;
 
 /*
 Copyright (c) 2016 Robert Atkinson
@@ -39,6 +39,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either

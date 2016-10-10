@@ -1,4 +1,4 @@
-package net.ftc.tdt2845;
+package net.ftc.tdt2845.robot.subsystems;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
