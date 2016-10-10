@@ -125,10 +125,10 @@ public class MecanumDriveSystem extends DriveSystem {
 //              stop();
 //            }
 //        }
-//        else
-//        {
-//          stop();
-//        }
+        else
+        {
+          stop();
+        }
         // TODO: Implement lateral arc, if needed by the team
     }
     private void stop()
