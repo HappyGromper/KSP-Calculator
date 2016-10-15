@@ -54,9 +54,9 @@ import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-
-@TeleOp(name="MecanumTeleOp", group="Linear Opmode")  // @Autonomous(...) is the other common choice
+@TeleOp(name="MecanumTeleOp", group="Opmode")  // @Autonomous(...) is the other common choice
 //@Disabled
+//TODO make LinearOpMode into Opmode
 public class MecanumTeleOp extends LinearOpMode {
     DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
     public float x, y, z, w, pwr;
