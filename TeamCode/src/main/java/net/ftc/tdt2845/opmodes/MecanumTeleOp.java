@@ -33,7 +33,6 @@ TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -42,6 +41,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
+import net.ftc.tdt2845.robot.subsystems.Shooter;
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -62,6 +62,10 @@ public class MecanumTeleOp extends OpMode {
     DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
     public float x, y, z, w, pwr;
     private ElapsedTime runtime = new ElapsedTime();
+    MecanumDriveSystem mecanumDriveSystem = null;
+    Shooter shooter = null;
+
+
 //    ColorSensor colSensor;
 //    DeviceInterfaceModule dim;
 //    static final int LED_CHANNEL = 0;
@@ -94,12 +98,12 @@ public class MecanumTeleOp extends OpMode {
 //        }
 //    }
 
-    MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
+        mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
+        shooter = new Shooter(hardwareMap, telemetry);
     }
 
     @Override
@@ -108,6 +112,9 @@ public class MecanumTeleOp extends OpMode {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.update();
         mecanumDriveSystem.adjustPower(gamepad1);
+        shooter.getShooterPosition();
+        shooter.reload(gamepad1);
+        shooter.shoot(gamepad1);
 
     }
 }

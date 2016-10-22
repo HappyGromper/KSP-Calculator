@@ -44,11 +44,11 @@ public class RedAutonomous extends LinearOpMode
         autonomousDriveSystem.goForward(1, 10);
 
         //Color sensor code thata ctivates once the color is ditected, //TODO Test code
-        colorSensor = new TDTColorSensor(hardwareMap, telemetry);
-        while(! colorSensor.getRedBlue().equals("red")){
-            //contact Chris Willingham about sleep thread
-            Thread.sleep(1000);
-        }
+//        colorSensor = new TDTColorSensor(hardwareMap, telemetry);
+//        while(! colorSensor.getRedBlue().equals("red")){
+//            //contact Chris Willingham about sleep thread
+//            Thread.sleep(1000);
+//        }
         //put in code to push button
 
 

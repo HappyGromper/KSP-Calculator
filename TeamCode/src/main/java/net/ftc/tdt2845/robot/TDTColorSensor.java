@@ -10,15 +10,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 
 public class TDTColorSensor {
-    HardwareMap hardwareMap=null;
-    Telemetry telemetry=null;
+    HardwareMap hardwareMap = null;
+    Telemetry telemetry = null;
     ColorSensor colorSensor;
 
     public TDTColorSensor(HardwareMap hardwareMap, Telemetry telemetry) {
         super();
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
-        colorSensor = hardwareMap.colorSensor.get("sensor_color");
+        colorSensor = hardwareMap.colorSensor.get("sensorColor");
         colorSensor.enableLed(true);
     }
     public String getRedBlue(){

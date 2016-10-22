@@ -57,8 +57,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 @TeleOp(name="SquareTeleOp", group="Opmode")  // @Autonomous(...) is the other common choice
-//@Disabled
-//TODO make LinearOpMode into Opmode
+//@Disable
 public class SquareTeleOp extends OpMode {
     DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
     public float x, y, z, w, pwr;
@@ -76,7 +75,8 @@ public class SquareTeleOp extends OpMode {
     public void loop() {
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.update();
+
         tdtColorSensor.getRedBlue();
+        telemetry.update();
     }
 }

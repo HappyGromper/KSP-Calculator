@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  */
 public class MecanumDriveSystem extends DriveSystem {
     // constant variable to manipulate the power equally for all drive motors
-    static final private double TRANSLATIONAL_POWER_FACTOR = 0.5;
+    static final private double TRANSLATIONAL_POWER_FACTOR = 1;
     static final private double ROTATIONAL_POWER_FACTOR = 0.5;
 
     // constant variable to check for THRESHOLD for joystick x, y values
