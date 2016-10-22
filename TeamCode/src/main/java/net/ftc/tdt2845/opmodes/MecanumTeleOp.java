@@ -34,6 +34,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -57,77 +58,56 @@ import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 @TeleOp(name="MecanumTeleOp", group="Opmode")  // @Autonomous(...) is the other common choice
 //@Disabled
 //TODO make LinearOpMode into Opmode
-public class MecanumTeleOp extends LinearOpMode {
+public class MecanumTeleOp extends OpMode {
     DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
     public float x, y, z, w, pwr;
+    private ElapsedTime runtime = new ElapsedTime();
 //    ColorSensor colSensor;
 //    DeviceInterfaceModule dim;
 //    static final int LED_CHANNEL = 0;
+// DcMotor leftMotor = null;
+// DcMotor rightMotor = null;
 
     /* Declare OpMode members. */
-    private ElapsedTime runtime = new ElapsedTime();
-    // DcMotor leftMotor = null;
-    // DcMotor rightMotor = null;
 
+//    @Override
+//    public void runOpMode() throws InterruptedException {
+//
+//
+//        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
+//        telemetry.addData("Status", "Initialized");
+//        telemetry.update();
+//
+//
+//        // Wait for the game to start (driver presses PLAY)
+//        waitForStart();
+//        runtime.reset();
+//
+//        // run until the end of the match (driver presses STOP)
+//        while (opModeIsActive()) {
+//
+//telemetry.addData("Status", "Run Time: " + runtime.toString());
+//    telemetry.update();
+//    mecanumDriveSystem.adjustPower(gamepad1);
+//
+//            idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
+//        }
+//    }
+
+    MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
     @Override
-    public void runOpMode() throws InterruptedException {
-
-//        rearLeft.setDirection(DcMotor.Direction.REVERSE);
-//        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
-
-//        dim = hardwareMap.deviceInterfaceModule.get("dim");
-//        dim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
-//        colSensor = hardwareMap.colorSensor.get("colorSensor");
-
-//        boolean colEnabled = true;
-//        dim.setDigitalChannelState(LED_CHANNEL, colEnabled);
-
+    public void init() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        /* eg: Initialize the hardware variables. Note that the strings used here as parameters
-         * to 'get' must correspond to the names assigned during the robot configuration
-         * step (using the FTC Robot Controller app on the phone).
-         */
-        // leftMotor  = hardwareMap.dcMotor.get("left motor");
-        // rightMotor = hardwareMap.dcMotor.get("right motor");
+    }
 
-        // eg: Set the drive motor directions:
-        // "Reverse" the motor that runs backwards when connected directly to the battery
-        // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        // rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+    @Override
+    public void loop() {
 
-        // Wait for the game to start (driver presses PLAY)
-        waitForStart();
-        runtime.reset();
+        telemetry.addData("Status", "Run Time: " + runtime.toString());
+        telemetry.update();
+        mecanumDriveSystem.adjustPower(gamepad1);
 
-        // run until the end of the match (driver presses STOP)
-        while (opModeIsActive()) {
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.update();
-
-            // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
-            // leftMotor.setPower(-gamepad1.left_stick_y);
-            // rightMotor.setPower(-gamepad1.right_stick_y);
-//            float gamepadStrafeDirection = gamepad1.left_stick_x;
-//            float gamepadStrafeThrottle = gamepad1.left_stick_y;
-//            float gamepadTurnThrottle = -gamepad1.right_stick_y;
-//            float gamepadTurnDirection = gamepad1.right_stick_x;
-
-            mecanumDriveSystem.adjustPower(gamepad1);
-
-//            double rValue = colSensor.red();
-//            double gValue = colSensor.green();
-//            double bValue = colSensor.blue();
-//            double rliValue = rValue + gValue + bValue;
-
-//            telemetry.addData("Red ", rValue);
-//            telemetry.addData("Green ", gValue);
-//            telemetry.addData("Blue ", bValue);
-//            telemetry.addData("Sum ", rliValue);
-
-            idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
-        }
     }
 }

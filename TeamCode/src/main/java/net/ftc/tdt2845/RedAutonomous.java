@@ -30,15 +30,20 @@ public class RedAutonomous extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException {
 
-            //declare the variable for TDTColorSensor
+        //declare the variable for TDTColorSensor
         TDTColorSensor colorSensor = null;
 
         waitForStart();
         runtime.reset();
         AutonomousDriveSystem autonomousDriveSystem = new AutonomousDriveSystem(hardwareMap);
 
+        //Strafing by Power, distance in inches, and direction(right or left)
         autonomousDriveSystem.strafe(1, 10, right);
+
+        //Moves forward by power and distance in inches
         autonomousDriveSystem.goForward(1, 10);
+
+        //Color sensor code thata ctivates once the color is ditected, //TODO Test code
         colorSensor = new TDTColorSensor(hardwareMap, telemetry);
         while(! colorSensor.getRedBlue().equals("red")){
             //contact Chris Willingham about sleep thread

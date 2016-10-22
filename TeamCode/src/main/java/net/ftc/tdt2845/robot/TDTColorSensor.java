@@ -16,8 +16,8 @@ public class TDTColorSensor {
 
     public TDTColorSensor(HardwareMap hardwareMap, Telemetry telemetry) {
         super();
-        this.hardwareMap=hardwareMap;
-        this.telemetry=telemetry;
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
         colorSensor = hardwareMap.colorSensor.get("sensor_color");
         colorSensor.enableLed(true);
     }
