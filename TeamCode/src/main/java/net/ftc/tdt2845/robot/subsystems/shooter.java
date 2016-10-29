@@ -1,10 +1,13 @@
 package net.ftc.tdt2845.robot.subsystems;
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -13,11 +16,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 
 public class Shooter {
-
-    DcMotor shootingMotor;
-    Servo shootingServo;
-    HardwareMap hardwareMap=null;
-    Telemetry telemetry=null;
+    private TouchSensor stopButton;
+    private DcMotor shootingMotor;
+    private Servo shootingServo;
+    private HardwareMap hardwareMap=null;
+    private Telemetry telemetry=null;
 //    double motorPos = shootingMotor.getCurrentPosition();
     int shootPosition = 0;
 //    double reloadPosition;
@@ -28,6 +31,7 @@ public class Shooter {
         this.telemetry = telemetry;
         shootingServo = hardwareMap.servo.get("shootingServo");
         shootingMotor = hardwareMap.dcMotor.get("shootingMotor");
+        stopButton = hardwareMap.touchSensor.get("stop button");
         shootingMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shootingServo.setPosition(.5);
         if (shootingServo == null){
@@ -112,6 +116,20 @@ public class Shooter {
             shootingServo.setPosition(.25);
         }
     }
+
+    public DcMotor getShooter(){
+        return shootingMotor;
+
+    }
+    public Servo getShootingServo(){
+        return  shootingServo;
+    }
+
+    public TouchSensor getStopButton() {
+        return stopButton;
+    }
+
+
 //
 //    }
 //

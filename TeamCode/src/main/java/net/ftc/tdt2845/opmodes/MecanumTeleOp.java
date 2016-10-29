@@ -41,6 +41,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import net.ftc.tdt2845.ServoTest;
+import net.ftc.tdt2845.robot.ShootCommand;
 import net.ftc.tdt2845.robot.TDTRobot;
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 import net.ftc.tdt2845.robot.subsystems.Shooter;
@@ -63,15 +64,10 @@ import net.ftc.tdt2845.robot.subsystems.Shooter;
 public class MecanumTeleOp extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     TDTRobot tdtRobot;
-//    MecanumDriveSystem mecanumDriveSystem = null;
-    Shooter shooter = null;
+    ShootCommand shootCommand;
+    boolean previousRB = false;
+    Thread shootThread;
 //    ServoTest servoTest = null;
-
-//    ColorSensor colSensor;
-//    DeviceInterfaceModule dim;
-//    static final int LED_CHANNEL = 0;
-// DcMotor leftMotor = null;
-// DcMotor rightMotor = null;
 
     /* Declare OpMode members. */
 
@@ -104,19 +100,33 @@ public class MecanumTeleOp extends OpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         tdtRobot = new TDTRobot(this);
-        shooter = new Shooter(hardwareMap, telemetry);
+        shootCommand = new ShootCommand(tdtRobot.getShooter());
 //        servoTest = new ServoTest(hardwareMap, telemetry);
+        shootThread = new Thread(shootCommand);
     }
 
     @Override
     public void loop() {
         //Make sure to have any and all telementry calls above the telemetry.update();
-        shooter.shootPos();
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        shooter.getMotor();
+        telemetry.addData("Is pushed", tdtRobot.getShooter().getStopButton().isPressed());
         telemetry.update();
         tdtRobot.getDrivetrain().adjustPower(gamepad1);
-        shooter.ShootSystem(gamepad1);
+        if (!previousRB && gamepad2.right_bumper && !shootThread.isAlive()){
+            shootThread = new Thread(shootCommand);
+            shootThread.start();
+
+        }
+
+        previousRB = gamepad2.right_bumper;
+
 
     }
+
+    @Override
+    public void stop() {
+        super.stop();
+        shootCommand.killThread();
+    }
 }
+

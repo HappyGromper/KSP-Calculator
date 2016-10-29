@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
+import net.ftc.tdt2845.robot.subsystems.Shooter;
 
 /**
  * Created by chris on 10/10/16.
@@ -11,14 +12,19 @@ import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
 public class TDTRobot {
     private MecanumDriveSystem drivetrain;
+    private Shooter shooter;
 
 
     public TDTRobot(OpMode opMode){
         drivetrain = new MecanumDriveSystem(opMode.hardwareMap);
-
+        shooter = new Shooter(opMode.hardwareMap, opMode.telemetry);
     }
 
     public MecanumDriveSystem getDrivetrain() {
         return drivetrain;
+    }
+
+    public Shooter getShooter() {
+        return shooter;
     }
 }
