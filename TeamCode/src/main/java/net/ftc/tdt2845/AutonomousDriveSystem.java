@@ -13,6 +13,16 @@ public class AutonomousDriveSystem extends DriveSystem {
     }
 
     public double strafe(double pwr, double dist, double dirct){
+        //Formula for autonomous
+//        double WHEEL_DIAMETER = 2;
+//        double GEAR_RATIO = 16 / 9; //output sprocket over driven sprocket
+//        double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
+//        double TICKS_PER_ROTATION = 1440;
+//        double targetTick = ((distance / WHEEL_CIRCUMFERENCE) * TICKS_PER_ROTATION) / 2;
+
+
+
+
 
         double circumference = Math.PI * WHEEL_DIAMETER;
         double rotations = dist / circumference;

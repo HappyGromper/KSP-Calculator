@@ -39,6 +39,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import net.ftc.tdt2845.ServoTest;
 import net.ftc.tdt2845.robot.TDTColorSensor;
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
@@ -62,13 +63,15 @@ public class SquareTeleOp extends OpMode {
     DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
     public float x, y, z, w, pwr;
     private ElapsedTime runtime = new ElapsedTime();
-    TDTColorSensor tdtColorSensor = null;
+//    TDTColorSensor tdtColorSensor = null;
+    ServoTest servoTest = null;
 
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        tdtColorSensor = new TDTColorSensor(hardwareMap, telemetry);
+//        tdtColorSensor = new TDTColorSensor(hardwareMap, telemetry);
+        servoTest = new ServoTest(hardwareMap, telemetry);
     }
 
     @Override
@@ -76,7 +79,12 @@ public class SquareTeleOp extends OpMode {
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-        tdtColorSensor.getRedBlue();
+//        tdtColorSensor.getRedBlue();
+        servoTest.SetServoPosition(1);
+        servoTest.CurrentServoPosition();
+
+
+
         telemetry.update();
     }
 }

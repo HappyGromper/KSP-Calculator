@@ -1,6 +1,7 @@
 package net.ftc.tdt2845.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
@@ -9,9 +10,15 @@ import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
  */
 
 public class TDTRobot {
-    public MecanumDriveSystem drivetrain;
+    private MecanumDriveSystem drivetrain;
+
 
     public TDTRobot(OpMode opMode){
         drivetrain = new MecanumDriveSystem(opMode.hardwareMap);
+
+    }
+
+    public MecanumDriveSystem getDrivetrain() {
+        return drivetrain;
     }
 }

@@ -40,6 +40,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import net.ftc.tdt2845.ServoTest;
+import net.ftc.tdt2845.robot.TDTRobot;
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 import net.ftc.tdt2845.robot.subsystems.Shooter;
 
@@ -59,12 +61,11 @@ import net.ftc.tdt2845.robot.subsystems.Shooter;
 //@Disabled
 //TODO make LinearOpMode into Opmode
 public class MecanumTeleOp extends OpMode {
-    DcMotor frontleft, frontright, backleft, backright, collectorOne, collectorTwo, liftleft, liftright; //TODO convert to motormap @jake
-    public float x, y, z, w, pwr;
     private ElapsedTime runtime = new ElapsedTime();
-    MecanumDriveSystem mecanumDriveSystem = null;
+    TDTRobot tdtRobot;
+//    MecanumDriveSystem mecanumDriveSystem = null;
     Shooter shooter = null;
-
+//    ServoTest servoTest = null;
 
 //    ColorSensor colSensor;
 //    DeviceInterfaceModule dim;
@@ -102,19 +103,20 @@ public class MecanumTeleOp extends OpMode {
     public void init() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        mecanumDriveSystem = new MecanumDriveSystem(hardwareMap);
+        tdtRobot = new TDTRobot(this);
         shooter = new Shooter(hardwareMap, telemetry);
+//        servoTest = new ServoTest(hardwareMap, telemetry);
     }
 
     @Override
     public void loop() {
-
+        //Make sure to have any and all telementry calls above the telemetry.update();
+        shooter.shootPos();
         telemetry.addData("Status", "Run Time: " + runtime.toString());
+        shooter.getMotor();
         telemetry.update();
-        mecanumDriveSystem.adjustPower(gamepad1);
-        shooter.getShooterPosition();
-        shooter.reload(gamepad1);
-        shooter.shoot(gamepad1);
+        tdtRobot.getDrivetrain().adjustPower(gamepad1);
+        shooter.ShootSystem(gamepad1);
 
     }
 }
