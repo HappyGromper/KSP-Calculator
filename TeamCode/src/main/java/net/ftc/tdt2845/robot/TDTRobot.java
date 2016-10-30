@@ -16,7 +16,7 @@ public class TDTRobot {
 
 
     public TDTRobot(OpMode opMode){
-        drivetrain = new MecanumDriveSystem(opMode.hardwareMap);
+        drivetrain = new MecanumDriveSystem(opMode);
         shooter = new Shooter(opMode.hardwareMap, opMode.telemetry);
     }
 

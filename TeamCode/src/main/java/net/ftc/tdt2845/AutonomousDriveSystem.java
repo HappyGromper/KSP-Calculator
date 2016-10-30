@@ -1,5 +1,6 @@
 package net.ftc.tdt2845;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import net.ftc.tdt2845.robot.subsystems.DriveSystem;
@@ -8,8 +9,8 @@ import net.ftc.tdt2845.robot.subsystems.DriveSystem;
  * Created by Claudia on 9/24/2016.
  */
 public class AutonomousDriveSystem extends DriveSystem {
-    public AutonomousDriveSystem(HardwareMap hardwareMap) {
-        super(hardwareMap);
+    public AutonomousDriveSystem(OpMode opMode) {
+        super(opMode);
     }
 
     public double strafe(double pwr, double dist, double dirct){

@@ -1,5 +1,8 @@
 package net.ftc.tdt2845.robot.subsystems;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,9 +17,9 @@ public class MecanumDriveSystem extends DriveSystem {
 
     // constant variable to check for THRESHOLD for joystick x, y values
     static final private double THRESHOLD = 0.2;
+    public MecanumDriveSystem(OpMode opMode) {
+        super(opMode);
 
-    public MecanumDriveSystem(HardwareMap hardwareMap) {
-        super(hardwareMap);
     }
     public void adjustPower(Gamepad gamepad1) {
 
@@ -131,6 +134,46 @@ public class MecanumDriveSystem extends DriveSystem {
         }
         // TODO: Implement lateral arc, if needed by the team
     }
+
+    public void goForward(double distance, double power)  {
+        double WHEEL_DIAMETER = 3;
+        double GEAR_RATIO = 16 / 9; //output sprocket over driven sprocket
+        double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
+        double TICKS_PER_ROTATION = 1440;
+        double targetTick = ((distance / WHEEL_CIRCUMFERENCE) * TICKS_PER_ROTATION) / 2;
+        double targetPosition = frontLeft.getCurrentPosition() + targetTick;
+
+        start(power);
+        while (!linearOpMode.isStopRequested() && frontLeft.getCurrentPosition() < targetPosition)  {
+            linearOpMode.sleep(50);
+            linearOpMode.idle();
+        }
+    }
+    public void turnRight (int degrees){
+        int currentHeading = gyro.getHeading();
+        int targetHeading = currentHeading+degrees;
+        frontLeft.setPower(1);
+        rearLeft.setPower(1);
+        frontRight.setPower(-1);
+        rearRight.setPower(-1);
+
+        while (gyro.getHeading() < targetHeading){
+            linearOpMode.sleep(1);
+            linearOpMode.idle();
+        }
+        stop();
+
+    }
+    public void calibrate(){
+        gyro.calibrate();
+
+        // make sure the gyro is calibrated.
+        while (!linearOpMode.isStopRequested() && gyro.isCalibrating())  {
+            linearOpMode.sleep(50);
+            linearOpMode.idle();
+        }
+    }
+
     private void stop()
     {
       frontLeft.setPower(0);
@@ -138,4 +181,13 @@ public class MecanumDriveSystem extends DriveSystem {
       rearLeft.setPower(0);
       rearRight.setPower(0);
     }
+	
+	private void start(double power)
+    {
+      frontLeft.setPower(power);
+      frontRight.setPower(power);
+      rearLeft.setPower(power);
+      rearRight.setPower(power);
+    }
+
 }

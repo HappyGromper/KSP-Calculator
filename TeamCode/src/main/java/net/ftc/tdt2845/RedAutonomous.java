@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import net.ftc.tdt2845.robot.TDTColorSensor;
+import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -30,18 +31,21 @@ public class RedAutonomous extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException {
 
+        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem (this);
         //declare the variable for TDTColorSensor
         TDTColorSensor colorSensor = null;
 
+
+        mecanumDriveSystem.calibrate();
         waitForStart();
         runtime.reset();
-        AutonomousDriveSystem autonomousDriveSystem = new AutonomousDriveSystem(hardwareMap);
 
         //Strafing by Power, distance in inches, and direction(right or left)
-        autonomousDriveSystem.strafe(1, 10, right);
+//        autonomousDriveSystem.strafe(1, 10, right);
 
         //Moves forward by power and distance in inches
-        autonomousDriveSystem.goForward(1, 10);
+        mecanumDriveSystem.goForward(12, .5);
+        mecanumDriveSystem.turnRight(90);
 
         //Color sensor code thata ctivates once the color is ditected, //TODO Test code
 //        colorSensor = new TDTColorSensor(hardwareMap, telemetry);
@@ -50,11 +54,7 @@ public class RedAutonomous extends LinearOpMode
 //            Thread.sleep(1000);
 //        }
         //put in code to push button
-
-
-
     }
-
 
 }
 
