@@ -6,6 +6,7 @@ package net.ftc.tdt2845;
 
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -16,7 +17,7 @@ import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name="RedAutonomous", group="Linear Opmode")
+@Autonomous(name="RedAutonomous", group="Linear Opmode")
 public class RedAutonomous extends LinearOpMode
 {
 

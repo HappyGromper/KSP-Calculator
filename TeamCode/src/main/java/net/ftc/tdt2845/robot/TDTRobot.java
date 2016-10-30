@@ -13,6 +13,7 @@ import net.ftc.tdt2845.robot.subsystems.Shooter;
 public class TDTRobot {
     private MecanumDriveSystem drivetrain;
     private Shooter shooter;
+    private Collector collector;
 
 
     public TDTRobot(OpMode opMode){
@@ -26,5 +27,9 @@ public class TDTRobot {
 
     public Shooter getShooter() {
         return shooter;
+    }
+
+    public Collector getCollector(){
+        return collector;
     }
 }

@@ -111,13 +111,15 @@ public class MecanumTeleOp extends OpMode {
         telemetry.addData("Is pushed", tdtRobot.getShooter().getStopButton().isPressed());
         telemetry.update();
         tdtRobot.getDrivetrain().adjustPower(gamepad1);
-        if (!previousRB && gamepad2.right_bumper && !shootThread.isAlive()){
+        if (!previousRB && gamepad1.right_bumper && !shootThread.isAlive()){
             shootThread = new Thread(shootCommand);
             shootThread.start();
 
         }
 
-        previousRB = gamepad2.right_bumper;
+        tdtRobot.getCollector().collectorIntake(gamepad2);
+
+        previousRB = gamepad1.right_bumper;
 
 
     }

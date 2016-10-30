@@ -22,7 +22,7 @@ public class ShootCommand implements Runnable{
 
     private void fire(){
         while (shooter.getShooter().getCurrentPosition() < 500 && !threadKill ){
-            shooter.getShooter().setPower(0.1);
+            shooter.getShooter().setPower(1);
 
         }
         shooter.getShooter().setPower(0);
@@ -30,7 +30,7 @@ public class ShootCommand implements Runnable{
 
     private void reset(){
         while ((shooter.getShooter().getCurrentPosition() >= 10  || !shooter.getStopButton().isPressed()) && !threadKill){
-            shooter.getShooter().setPower(-.1);
+            shooter.getShooter().setPower(-.50);
             shooter.getShootingServo().setPosition(.85);
         }
         shooter.getShooter().setPower(0);
