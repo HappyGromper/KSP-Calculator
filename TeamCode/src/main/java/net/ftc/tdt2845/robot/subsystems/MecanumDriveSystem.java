@@ -144,9 +144,9 @@ public class MecanumDriveSystem extends DriveSystem {
         double targetPosition = frontLeft.getCurrentPosition() + targetTick;
 
         start(power);
-        while (!linearOpMode.isStopRequested() && frontLeft.getCurrentPosition() < targetPosition)  {
-            linearOpMode.sleep(50);
-            linearOpMode.idle();
+        while (!getLinearOpMode().isStopRequested() && frontLeft.getCurrentPosition() < targetPosition)  {
+            getLinearOpMode().sleep(50);
+            getLinearOpMode().idle();
         }
     }
     public void turnRight (int degrees){
@@ -158,8 +158,8 @@ public class MecanumDriveSystem extends DriveSystem {
         rearRight.setPower(-1);
 
         while (gyro.getHeading() < targetHeading){
-            linearOpMode.sleep(1);
-            linearOpMode.idle();
+            getLinearOpMode().sleep(1);
+            getLinearOpMode().idle();
         }
         stop();
 
@@ -168,9 +168,9 @@ public class MecanumDriveSystem extends DriveSystem {
         gyro.calibrate();
 
         // make sure the gyro is calibrated.
-        while (!linearOpMode.isStopRequested() && gyro.isCalibrating())  {
-            linearOpMode.sleep(50);
-            linearOpMode.idle();
+        while (!getLinearOpMode().isStopRequested() && gyro.isCalibrating())  {
+            getLinearOpMode().sleep(50);
+            getLinearOpMode().idle();
         }
     }
 

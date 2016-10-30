@@ -21,14 +21,14 @@ public abstract class DriveSystem {
     static final private double THRESHOLD = 0.2;
     HardwareMap hardwareMap = null; // will be set in OpModeManager.runActiveOpMode
     protected ModernRoboticsI2cGyro gyro;
-    protected LinearOpMode linearOpMode;
+    protected OpMode opMode;
 
     public final static int ENCODER_CPR = 1120;
     public final static double GEAR_RATIO = 1;
     public final static double WHEEL_DIAMETER = 4.0;
 
     public DriveSystem(OpMode opMode) {
-        this.linearOpMode = (LinearOpMode) opMode;
+        this.opMode = (LinearOpMode) opMode;
         hardwareMap = opMode.hardwareMap;
         gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
 
@@ -37,6 +37,9 @@ public abstract class DriveSystem {
        rearLeft = hardwareMap.dcMotor.get("rMotorL");
        rearRight = hardwareMap.dcMotor.get("rMotorR");
 
+    }
+    public LinearOpMode getLinearOpMode (){
+        return (LinearOpMode) opMode;
     }
 
 }
