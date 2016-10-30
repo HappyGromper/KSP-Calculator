@@ -28,7 +28,7 @@ public abstract class DriveSystem {
     public final static double WHEEL_DIAMETER = 4.0;
 
     public DriveSystem(OpMode opMode) {
-        this.opMode = (LinearOpMode) opMode;
+        this.opMode = opMode;
         hardwareMap = opMode.hardwareMap;
         gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
 
