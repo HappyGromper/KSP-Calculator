@@ -1,10 +1,12 @@
-package net.ftc.tdt2845;
+package net.ftc.tdt2845.opmodes;
 
 /**
  * Created by Dschi on 10/5/2016.
  */
 
 
+
+import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -26,9 +28,6 @@ public class RedAutonomous extends LinearOpMode
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    public RedAutonomous(HardwareMap hardwareMap) {
-    }
-
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry.addData("message", "before mecanum");
@@ -37,31 +36,18 @@ public class RedAutonomous extends LinearOpMode
         MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem (this);
         //declare the variable for TDTColorSensor
         TDTColorSensor colorSensor = null;
-
-        telemetry.addData("message", "before calibrate");
-        telemetry.update();
-       // mecanumDriveSystem.calibrate();
-        telemetry.addData("message", "after calibrate");
-        telemetry.update();
         waitForStart();
-        telemetry.addData("message", "after waitForStart");
-        telemetry.update();
-        runtime.reset();
-        telemetry.addData("message", "after reset");
-        telemetry.update();
-        telemetry.addData("message", "after update");
-        telemetry.update();
 
         //Strafing by Power, distance in inches, and direction(right or left)
 //        autonomousDriveSystem.strafe(1, 10, right);
 
         //Moves forward by power and distance in inches
         mecanumDriveSystem.goForward(12, .5);
-        telemetry.addData("message", "after goForward");
-        telemetry.update();
-       // mecanumDriveSystem.turnRight(90);
-        telemetry.addData("message", "after turnRight");
-        telemetry.update();
+//        telemetry.addData("message", "after goForward");
+//        telemetry.update();
+//       // mecanumDriveSystem.turnRight(90);
+//        telemetry.addData("message", "after turnRight");
+//        telemetry.update();
 
         //Color sensor code thata ctivates once the color is ditected, //TODO Test code
 //        colorSensor = new TDTColorSensor(hardwareMap, telemetry);
@@ -69,6 +55,9 @@ public class RedAutonomous extends LinearOpMode
 //            //contact Chris Willingham about sleep thread
 //            Thread.sleep(1000);
 //        }
+        while(opModeIsActive()){
+            idle();
+        }
         //put in code to push button
     }
 

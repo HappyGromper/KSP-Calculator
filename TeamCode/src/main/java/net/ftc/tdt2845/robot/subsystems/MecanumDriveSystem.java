@@ -136,18 +136,20 @@ public class MecanumDriveSystem extends DriveSystem {
     }
 
     public void goForward(double distance, double power)  {
-        double WHEEL_DIAMETER = 3;
-        double GEAR_RATIO = 16 / 9; //output sprocket over driven sprocket
+        double WHEEL_DIAMETER = 4;
+        //double GEAR_RATIO = 16 / 9; //output sprocket over driven sprocket
         double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
         double TICKS_PER_ROTATION = 1440;
-        double targetTick = ((distance / WHEEL_CIRCUMFERENCE) * TICKS_PER_ROTATION) / 2;
+        double TICKS_PER_INCH = TICKS_PER_ROTATION/WHEEL_CIRCUMFERENCE;
+        double targetTick = distance*TICKS_PER_INCH;//((distance / WHEEL_CIRCUMFERENCE) * TICKS_PER_ROTATION);
         double targetPosition = frontLeft.getCurrentPosition() + targetTick;
 
         start(power);
         while (!getLinearOpMode().isStopRequested() && frontLeft.getCurrentPosition() < targetPosition)  {
-            getLinearOpMode().sleep(50);
+            //getLinearOpMode().sleep(50);
             getLinearOpMode().idle();
         }
+        stop();
     }
     public void turnRight (int degrees){
         int currentHeading = gyro.getHeading();
@@ -185,9 +187,9 @@ public class MecanumDriveSystem extends DriveSystem {
 	private void start(double power)
     {
       frontLeft.setPower(power);
-      frontRight.setPower(power);
+      frontRight.setPower(-power);
       rearLeft.setPower(power);
-      rearRight.setPower(power);
+      rearRight.setPower(-power);
     }
 
 }

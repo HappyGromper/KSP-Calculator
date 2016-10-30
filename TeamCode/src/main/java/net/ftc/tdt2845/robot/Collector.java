@@ -28,12 +28,15 @@ public class Collector {
     }
 
     public void collectorIntake(Gamepad gamepad2){
-        collector.setPower(gamepad2.left_trigger);
         if (gamepad2.left_bumper){
             collector.setPower(-1);
+        }else {
+            collector.setPower(gamepad2.left_trigger);
         }
         if (gamepad2.right_bumper){
-            collectorServo.setPosition(1);
+            collectorServo.setPosition(-1);
+        }else{
+            collectorServo.setPosition(0);
         }
     }
 
