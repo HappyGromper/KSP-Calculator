@@ -18,9 +18,8 @@ public class Collector {
 
 
     public Collector (HardwareMap hardwareMap, Telemetry telemetry) {
-        super();
         collectorServo = hardwareMap.servo.get("collectorServo");
-        collector = hardwareMap.dcMotor.get("collector'");
+        collector = hardwareMap.dcMotor.get("collector");
     }
 
     public void collectorIntake(double collectorPower, double servoPosition){

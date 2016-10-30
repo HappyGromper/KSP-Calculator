@@ -19,6 +19,7 @@ public class TDTRobot {
     public TDTRobot(OpMode opMode){
         drivetrain = new MecanumDriveSystem(opMode);
         shooter = new Shooter(opMode.hardwareMap, opMode.telemetry);
+        collector = new Collector(opMode.hardwareMap, opMode.telemetry);
     }
 
     public MecanumDriveSystem getDrivetrain() {
