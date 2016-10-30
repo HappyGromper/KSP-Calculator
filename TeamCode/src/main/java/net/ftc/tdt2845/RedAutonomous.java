@@ -40,7 +40,7 @@ public class RedAutonomous extends LinearOpMode
 
         telemetry.addData("message", "before calibrate");
         telemetry.update();
-        mecanumDriveSystem.calibrate();
+       // mecanumDriveSystem.calibrate();
         telemetry.addData("message", "after calibrate");
         telemetry.update();
         waitForStart();
@@ -59,7 +59,7 @@ public class RedAutonomous extends LinearOpMode
         mecanumDriveSystem.goForward(12, .5);
         telemetry.addData("message", "after goForward");
         telemetry.update();
-        mecanumDriveSystem.turnRight(90);
+       // mecanumDriveSystem.turnRight(90);
         telemetry.addData("message", "after turnRight");
         telemetry.update();
 
