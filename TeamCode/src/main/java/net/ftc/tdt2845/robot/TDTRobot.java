@@ -1,8 +1,8 @@
 package net.ftc.tdt2845.robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import net.ftc.tdt2845.robot.subsystems.Collector;
 import net.ftc.tdt2845.robot.subsystems.MecanumDriveSystem;
 import net.ftc.tdt2845.robot.subsystems.Shooter;
 

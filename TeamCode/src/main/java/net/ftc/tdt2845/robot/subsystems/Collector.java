@@ -1,4 +1,4 @@
-package net.ftc.tdt2845.robot;
+package net.ftc.tdt2845.robot.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -26,13 +26,18 @@ public class Collector {
         collector.setPower(collectorPower);
         collectorServo.setPosition(servoPosition);
     }
+    public  void dispense(double pwr){
+//        collectorServo.setDirection(-);
+        collectorServo.setPosition(pwr);
 
+    }
     public void collectorIntake(Gamepad gamepad2){
+
         collector.setPower(gamepad2.left_trigger);
-        if (gamepad2.left_bumper){
-            collector.setPower(-1);
-        }
-        if (gamepad2.right_bumper){
+        collector.setPower(gamepad2.right_trigger*-1);
+
+
+        while (gamepad2.right_bumper == true){
             collectorServo.setPosition(1);
         }
     }

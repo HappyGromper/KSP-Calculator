@@ -33,7 +33,7 @@ public class Shooter {
         shootingMotor = hardwareMap.dcMotor.get("shootingMotor");
         stopButton = hardwareMap.touchSensor.get("stop button");
         shootingMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shootingServo.setPosition(.5);
+        shootingServo.setPosition(.25);
         if (shootingServo == null){
             telemetry.addData("shooting servo null", "null");
             telemetry.update();
