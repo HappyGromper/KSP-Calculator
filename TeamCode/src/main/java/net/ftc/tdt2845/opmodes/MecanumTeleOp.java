@@ -37,10 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import net.ftc.tdt2845.robot.DispenseCommand;
 import net.ftc.tdt2845.robot.ShootCommand;
 import net.ftc.tdt2845.robot.TDTRobot;
@@ -67,11 +64,11 @@ public class MecanumTeleOp extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     TDTRobot tdtRobot;
     ShootCommand shootCommand;
-    DispenseCommand dispenseCommand;
+    //DispenseCommand dispenseCommand;
     boolean previousRB = false;
-    boolean previousRB2 = false;
+//    boolean previousRB2 = false;
     Thread shootThread;
-    Thread dispenseThread;
+//    Thread dispenseThread;
 //    ServoTest servoTest = null;
 
     /* Declare OpMode members. */
@@ -105,10 +102,10 @@ public class MecanumTeleOp extends OpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         tdtRobot = new TDTRobot(this);
-        shootCommand = new ShootCommand(tdtRobot.getShooter());
+        shootCommand = new ShootCommand(tdtRobot.getShooter(), this);
 //        servoTest = new ServoTest(hardwareMap, telemetry);
         shootThread = new Thread(shootCommand);
-        dispenseCommand = new DispenseCommand(tdtRobot.getCollector());
+//        dispenseCommand = new DispenseCommand(tdtRobot.getCollector());
         tdtRobot.getShooter().getShootingServo().setDirection(Servo.Direction.REVERSE);
     }
 
@@ -126,15 +123,17 @@ public class MecanumTeleOp extends OpMode {
 
         }
 
+
         tdtRobot.getCollector().collectorIntake(gamepad2);
+        tdtRobot.getCollector().dispense(-gamepad2.right_stick_y);
 
-        if (!previousRB2 && gamepad2.right_bumper && !dispenseThread.isAlive()){
-            dispenseThread = new Thread(dispenseCommand);;
-            dispenseThread.start();
-
-        }
-        previousRB = gamepad1.right_bumper;
-        previousRB2 = gamepad2.right_bumper;
+//        if (!previousRB2 && gamepad2.right_bumper && !dispenseThread.isAlive()){
+//            dispenseThread = new Thread(dispenseCommand);;
+//            dispenseThread.start();
+//
+//        }
+//        previousRB = gamepad1.right_bumper;
+//        previousRB2 = gamepad2.right_bumper;
 
 
     }
@@ -143,7 +142,7 @@ public class MecanumTeleOp extends OpMode {
     public void stop() {
         super.stop();
         shootCommand.killThread();
-        dispenseCommand.killThread();
+        //dispenseCommand.killThread();
     }
 }
 

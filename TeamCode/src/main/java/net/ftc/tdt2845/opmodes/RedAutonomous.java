@@ -8,10 +8,13 @@ package net.ftc.tdt2845.opmodes;
 
 import android.util.Log;
 
+import net.ftc.tdt2845.robot.ShootCommand;
+import net.ftc.tdt2845.robot.TDTRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import net.ftc.tdt2845.robot.TDTColorSensor;
@@ -22,34 +25,46 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Autonomous(name="RedAutonomous", group="Linear Opmode")
 public class RedAutonomous extends LinearOpMode
 {
-
-    double right = 1;
-    double left = 2;
-
     private ElapsedTime runtime = new ElapsedTime();
+    TDTRobot tdtRobot;
+    ShootCommand shootCommand;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry.addData("message", "before mecanum");
-        telemetry.update();
-
-        MecanumDriveSystem mecanumDriveSystem = new MecanumDriveSystem (this);
+        tdtRobot = new TDTRobot(this);
+        shootCommand = new ShootCommand(tdtRobot.getShooter(), this);
         //declare the variable for TDTColorSensor
         TDTColorSensor colorSensor = null;
+        tdtRobot.getShooter().getShootingServo().setDirection(Servo.Direction.REVERSE);
+        tdtRobot.getShooter().getShootingServo().setPosition(.85);
+        tdtRobot.getCollector().dispense(0);
+        tdtRobot.getDrivetrain().calibrate();
         waitForStart();
 
-        //Strafing by Power, distance in inches, and direction(right or left)
-//        autonomousDriveSystem.strafe(1, 10, right);
+//        Thread thread = new Thread(shootCommand);
+//        thread.start();
 
-        //Moves forward by power and distance in inches
-        mecanumDriveSystem.goForward(12, .5);
-//        telemetry.addData("message", "after goForward");
-//        telemetry.update();
-//       // mecanumDriveSystem.turnRight(90);
-//        telemetry.addData("message", "after turnRight");
-//        telemetry.update();
 
-        //Color sensor code thata ctivates once the color is ditected, //TODO Test code
+        shootCommand.run();
+
+
+        tdtRobot.getCollector().dispense(.25);
+        sleep(2000);
+
+        shootCommand.run();
+
+        tdtRobot.getCollector().dispense(0);
+
+        tdtRobot.getDrivetrain().turnRight(81);
+        tdtRobot.getDrivetrain().goForward(30, .5);
+//        tdtRobot.getDrivetrain().goForward(24, .1);
+
+//        mecanumDriveSystem.goForward(12, .5);
+
+
+
+//       Color sensor code that activates once the color is detected.
 //        colorSensor = new TDTColorSensor(hardwareMap, telemetry);
 //        while(! colorSensor.getRedBlue().equals("red")){
 //            //contact Chris Willingham about sleep thread
@@ -58,6 +73,7 @@ public class RedAutonomous extends LinearOpMode
         while(opModeIsActive()){
             idle();
         }
+//        shootCommand.killThread();
         //put in code to push button
     }
 

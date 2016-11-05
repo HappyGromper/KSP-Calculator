@@ -19,6 +19,7 @@ public class Collector {
 
     public Collector (HardwareMap hardwareMap, Telemetry telemetry) {
         collectorServo = hardwareMap.servo.get("collectorServo");
+        collectorServo.setDirection(Servo.Direction.REVERSE);
         collector = hardwareMap.dcMotor.get("collector");
     }
 
@@ -26,20 +27,21 @@ public class Collector {
         collector.setPower(collectorPower);
         collectorServo.setPosition(servoPosition);
     }
-    public  void dispense(double pwr){
+    public void dispense(double pos){
 //        collectorServo.setDirection(-);
-        collectorServo.setPosition(pwr);
+        collectorServo.setPosition(pos);
 
     }
     public void collectorIntake(Gamepad gamepad2){
+        collector.setPower(gamepad2.left_stick_y);
 
-        collector.setPower(gamepad2.left_trigger);
-        collector.setPower(gamepad2.right_trigger*-1);
+//        collector.setPower(gamepad2.left_trigger);
+//        collector.setPower(gamepad2.right_trigger*-1);
 
 
-        while (gamepad2.right_bumper == true){
-            collectorServo.setPosition(1);
-        }
+//        while (gamepad2.right_bumper == true){
+//            collectorServo.setPosition(1);
+//        }
     }
 
 

@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class MecanumDriveSystem extends DriveSystem {
     // constant variable to manipulate the power equally for all drive motors
     static final private double TRANSLATIONAL_POWER_FACTOR = 1;
-    static final private double ROTATIONAL_POWER_FACTOR = 0.5;
+    static final private double ROTATIONAL_POWER_FACTOR = 1;
 
     // constant variable to check for THRESHOLD for joystick x, y values
     static final private double THRESHOLD = 0.2;
@@ -135,6 +135,8 @@ public class MecanumDriveSystem extends DriveSystem {
         // TODO: Implement lateral arc, if needed by the team
     }
 
+    //Autonomous
+
     public void goForward(double distance, double power)  {
         double WHEEL_DIAMETER = 4;
         //double GEAR_RATIO = 16 / 9; //output sprocket over driven sprocket
@@ -146,22 +148,24 @@ public class MecanumDriveSystem extends DriveSystem {
 
         start(power);
         while (!getLinearOpMode().isStopRequested() && frontLeft.getCurrentPosition() < targetPosition)  {
-            //getLinearOpMode().sleep(50);
-            getLinearOpMode().idle();
+//            //getLinearOpMode().sleep(50);
+//            getLinearOpMode().idle();
+
         }
         stop();
     }
     public void turnRight (int degrees){
         int currentHeading = gyro.getHeading();
-        int targetHeading = currentHeading+degrees;
-        frontLeft.setPower(1);
-        rearLeft.setPower(1);
-        frontRight.setPower(-1);
-        rearRight.setPower(-1);
+        int targetHeading = currentHeading + degrees;
+
 
         while (gyro.getHeading() < targetHeading){
-            getLinearOpMode().sleep(1);
-            getLinearOpMode().idle();
+//            getLinearOpMode().sleep(1);
+//            getLinearOpMode().idle();
+            frontLeft.setPower(.5);
+            rearLeft.setPower(.5);
+            frontRight.setPower(.5);
+            rearRight.setPower(.5);
         }
         stop();
 
