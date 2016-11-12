@@ -2,7 +2,7 @@ package net.ftc.tdt2845.opmodes;
 
 /*
 Copyright (c) 2016 Robert Atkinson
-
+h
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -115,16 +115,22 @@ public class MecanumTeleOp extends OpMode {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Is pushed", tdtRobot.getShooter().getStopButton().isPressed());
         telemetry.update();
+
+
         tdtRobot.getDrivetrain().adjustPower(gamepad1);
+
+
+
 
         if (!previousRB && gamepad1.right_bumper && !shootThread.isAlive()){
             shootThread = new Thread(shootCommand);
             shootThread.start();
-
         }
 
 
         tdtRobot.getCollector().collectorIntake(gamepad2);
+
+
         tdtRobot.getCollector().dispense(-gamepad2.right_stick_y);
 
 //        if (!previousRB2 && gamepad2.right_bumper && !dispenseThread.isAlive()){

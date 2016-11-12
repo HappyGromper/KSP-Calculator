@@ -46,6 +46,7 @@ public class ShootCommand implements Runnable {
         }
         shooter.getShooter().setPower(0);
     }
+
     private void reset() {
 //        long targetTime = System.currentTimeMillis() + 2000;
         shooter.getShootingServo().setPosition(.25);

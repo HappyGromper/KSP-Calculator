@@ -19,7 +19,6 @@ public class MecanumDriveSystem extends DriveSystem {
     static final private double THRESHOLD = 0.2;
     public MecanumDriveSystem(OpMode opMode) {
         super(opMode);
-
     }
     public void adjustPower(Gamepad gamepad1) {
 
@@ -28,8 +27,10 @@ public class MecanumDriveSystem extends DriveSystem {
 
         // y for forward and backward motion; and for diagonal motion (in conjunction with x)
         double y = gamepad1.left_stick_y * TRANSLATIONAL_POWER_FACTOR;
+
         // x for right and left motion; and for diagonal motion (in conjunction with y)
         double x = gamepad1.right_stick_x * TRANSLATIONAL_POWER_FACTOR;
+
         // for rotation
         double rotation = gamepad1.left_stick_x * ROTATIONAL_POWER_FACTOR;
 

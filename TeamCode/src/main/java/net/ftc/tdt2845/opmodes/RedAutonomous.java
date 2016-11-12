@@ -46,18 +46,15 @@ public class RedAutonomous extends LinearOpMode
 //        thread.start();
 
 
-        shootCommand.run();
+//        shootCommand.run();
 
-
-        tdtRobot.getCollector().dispense(.25);
-        sleep(2000);
-
-        shootCommand.run();
-
-        tdtRobot.getCollector().dispense(0);
-
-        tdtRobot.getDrivetrain().turnRight(81);
-        tdtRobot.getDrivetrain().goForward(30, .5);
+//        tdtRobot.getCollector().dispense(.25);
+//        sleep(2000);
+//
+//        shootCommand.run();
+//
+//        tdtRobot.getCollector().dispense(0);
+        tdtRobot.getDrivetrain().goForward(30, .3);
 //        tdtRobot.getDrivetrain().goForward(24, .1);
 
 //        mecanumDriveSystem.goForward(12, .5);
